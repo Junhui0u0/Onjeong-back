@@ -10,13 +10,13 @@
     <br />
     <a href="https://github.com/On-jeong"><strong>1. Explore the Organization</strong></a><br>
     <a href="https://github.com/On-jeong/Onjeong-back"><strong>2. Explore Back-end Repository</strong></a><br>
-    <a href="https://www.onjeong-app.com/swagger-ui.html/"><strong>3. Explore API Documents</strong></a><br>    
+    <a href="https://www.onjeong-app.com/swagger-ui.html/"><strong>3. Explore API Documents</strong></a><br>
+    <a href="https://www.erdcloud.com/d/9JxX7unXDjeZN5XHC"><strong>4. Explore ERD </strong></a><br>
     <br />
     <br />
-    <!-- <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a> -->
-    <!-- · -->
   </p>
-  
+</div><br>
+
 
 ## 박준희 (Backend)
 저는 `family`, `user`, `profile`, `anniversary`, `board` 도메인 개발과 `AWS EC2 관리`, `DNS 등록`, `로드밸런싱`, `CI/CD`를 담당했습니다. <br><br><br><br>
@@ -219,7 +219,6 @@
             private int status;
             private String message;
             private String code;
-
             public ErrorResponse(ErrorCode errorCode){
                 this.status = errorCode.getStatus();
                 this.message = errorCode.getMessage();
@@ -293,18 +292,15 @@
           private final String code;
           private final String message;
           private final Object data;
-
           public ResultResponse(ResultCode resultCode, Object data) {
               this.status = resultCode.getStatus();
               this.code = resultCode.getCode();
               this.message = resultCode.getMessage();
               this.data = data;
           }
-
           public static ResultResponse of(ResultCode resultCode, Object data) {
               return new ResultResponse(resultCode, data);
           }
-
           public static ResultResponse of(ResultCode resultCode) {
               return new ResultResponse(resultCode, "");
           }
@@ -356,8 +352,4 @@ ex) Feat: 로그인 로직 추가
 ## 사용방법
 ## 기타
 ```
-<br><br><br>
-
-## ERD
-<p align="center"><a href="https://www.erdcloud.com/d/9JxX7unXDjeZN5XHC"><img src="https://img.shields.io/badge/ERD Cloud-946CEE?style=for-the-badge"/></a></p>
-<p align="right">(<a href="#top">back to top</a>)</p>
+<br><br>
