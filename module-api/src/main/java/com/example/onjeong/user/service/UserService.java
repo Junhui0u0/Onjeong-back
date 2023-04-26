@@ -40,10 +40,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-import java.util.Random;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -56,7 +53,6 @@ public class UserService {
     private final PureQuestionRepository pureQuestionRepository;
     private final AnswerRepository answerRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
     private final S3Uploader s3Uploader;
     private final AuthUtil authUtil;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -78,7 +74,7 @@ public class UserService {
                 .userStatus(userJoinDto.getUserStatus())
                 .userBirth(userJoinDto.getUserBirth())
                 .userEmail(userJoinDto.getUserEmail())
-                .deviceToken(userJoinDto.getDeviceToken())
+                .checkNotification(userJoinDto.getCheckNotification())
                 .role(UserRole.ROLE_USER)
                 .family(savedFamily)
                 .build();
@@ -116,7 +112,7 @@ public class UserService {
                 .userStatus(userJoinedDto.getUserStatus())
                 .userBirth(userJoinedDto.getUserBirth())
                 .userEmail(userJoinedDto.getUserEmail())
-                .deviceToken(userJoinedDto.getDeviceToken())
+                .checkNotification(userJoinedDto.getCheckNotification())
                 .role(UserRole.ROLE_USER)
                 .family(joinedUser.getFamily())
                 .build();
@@ -125,12 +121,21 @@ public class UserService {
                 .family(joinedUser.getFamily()).build());
     }
 
-    //로그인
+
+    //로그인 성공시 수행하는 작업
     @Transactional
-    public void login(UserLoginDto userLoginDto){
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userLoginDto.getUserNickname(), userLoginDto.getUserPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    public HashMap<String,String> getNewToken(Long userId){
+        final User loginUser= authUtil.getUserByUserId(userId);
+
+        final String newAccessToken = TokenUtils.generateJwtToken(loginUser);
+        final RefreshToken newRefreshToken = TokenUtils.generateJwtRefreshToken(loginUser);
+        refreshTokenRepository.save(newRefreshToken);
+
+        final HashMap<String,String> result= new HashMap<>();
+        result.put("newAccessToken", newAccessToken);
+        result.put("newRefreshToken", newRefreshToken.getRefreshToken());
+
+        return result;
     }
 
     //회원정보 수정
@@ -193,6 +198,8 @@ public class UserService {
                 .userBirth(loginUser.getUserBirth().toString())
                 .userNickname(loginUser.getUserNickname())
                 .familyId(loginUser.getFamily().getFamilyId())
+                .userEmail(loginUser.getUserEmail())
+                .userNotification((loginUser.getDeviceToken() != null))
                 .build();
     }
 

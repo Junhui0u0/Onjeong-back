@@ -4,6 +4,7 @@ import com.example.onjeong.notification.service.NotificationService;
 import com.example.onjeong.coin.domain.CoinHistoryType;
 import com.example.onjeong.coin.service.CoinService;
 import com.example.onjeong.profile.domain.Profile;
+import com.example.onjeong.profile.domain.SelfIntroductionType;
 import com.example.onjeong.profile.dto.*;
 import com.example.onjeong.profile.service.ProfileService;
 import com.example.onjeong.result.ResultCode;
@@ -116,9 +117,9 @@ public class ProfileController {
     public ResponseEntity<ResultResponse> registerProfileFavorite(@PathVariable("userId") Long userId
             , @RequestBody SelfIntroductionAnswerRegisterDto selfIntroductionAnswerRegisterDto) throws FirebaseMessagingException{
 
-        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "favorite"));
+        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.FAVORITE));
         else{
-            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "favorite"));
+            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.FAVORITE));
             coinService.coinSave(CoinHistoryType.PROFILEFAV, 100);
         }
         return ResponseEntity.ok(ResultResponse.of(ResultCode.POST_FAVORITE_SUCCESS));
@@ -127,7 +128,7 @@ public class ProfileController {
     @ApiOperation(value="좋아하는 것 삭제하기")
     @DeleteMapping(value = "/profiles/favorites/{userId}/{selfIntroductionAnswerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> deleteProfileFavorite(@PathVariable("userId") Long userId, @PathVariable("selfIntroductionAnswerId") Long selfIntroductionAnswerId) {
-        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, "favorite");
+        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, SelfIntroductionType.FAVORITE);
         return ResponseEntity.ok(ResultResponse.of(ResultCode.DELETE_FAVORITE_SUCCESS));
     }
 
@@ -136,9 +137,9 @@ public class ProfileController {
     public ResponseEntity<ResultResponse> registerProfileHate(@PathVariable("userId") Long userId
             , @RequestBody SelfIntroductionAnswerRegisterDto selfIntroductionAnswerRegisterDto) throws FirebaseMessagingException{
 
-        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "hate"));
+        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.HATE));
         else{
-            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "hate"));
+            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.HATE));
             coinService.coinSave(CoinHistoryType.PROFILEHATE, 100);
         }
         return ResponseEntity.ok(ResultResponse.of(ResultCode.POST_HATE_SUCCESS));
@@ -147,7 +148,7 @@ public class ProfileController {
     @ApiOperation(value="싫어하는 것 삭제하기")
     @DeleteMapping(value = "/profiles/hates/{userId}/{selfIntroductionAnswerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> deleteProfileHate(@PathVariable("userId") Long userId, @PathVariable("selfIntroductionAnswerId") Long selfIntroductionAnswerId) {
-        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, "hate");
+        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, SelfIntroductionType.HATE);
         return ResponseEntity.ok(ResultResponse.of(ResultCode.DELETE_HATE_SUCCESS));
     }
 
@@ -156,9 +157,9 @@ public class ProfileController {
     public ResponseEntity<ResultResponse> registerProfileExpression(@PathVariable("userId") Long userId
             , @RequestBody SelfIntroductionAnswerRegisterDto selfIntroductionAnswerRegisterDto) throws FirebaseMessagingException{
 
-        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "expression"));
+        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.EXPRESSION));
         else{
-            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "expression"));
+            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.EXPRESSION));
             coinService.coinSave(CoinHistoryType.PROFILEEXPRESSION, 100);
         }
         return ResponseEntity.ok(ResultResponse.of(ResultCode.POST_EXPRESSION_SUCCESS));
@@ -167,7 +168,7 @@ public class ProfileController {
     @ApiOperation(value="한단어로 표현하는 것 삭제하기")
     @DeleteMapping(value = "/profiles/expressions/{userId}/{selfIntroductionAnswerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> deleteProfileExpression(@PathVariable("userId") Long userId, @PathVariable("selfIntroductionAnswerId") Long selfIntroductionAnswerId) {
-        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, "expression");
+        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, SelfIntroductionType.EXPRESSION);
         return ResponseEntity.ok(ResultResponse.of(ResultCode.DELETE_EXPRESSION_SUCCESS));
     }
 
@@ -176,9 +177,9 @@ public class ProfileController {
     public ResponseEntity<ResultResponse> registerProfileInterest(@PathVariable("userId") Long userId
             , @RequestBody SelfIntroductionAnswerRegisterDto selfIntroductionAnswerRegisterDto) throws FirebaseMessagingException{
 
-        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "interest"));
+        if(profileService.checkProfileUpload()) notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.INTEREST));
         else{
-            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, "interest"));
+            notificationService.sendProfileModify(profileService.registerSelfIntroductionAnswer(userId, selfIntroductionAnswerRegisterDto, SelfIntroductionType.INTEREST));
             coinService.coinSave(CoinHistoryType.PROFILEINTEREST, 100);
         }
         return ResponseEntity.ok(ResultResponse.of(ResultCode.POST_INTEREST_SUCCESS));
@@ -187,7 +188,7 @@ public class ProfileController {
     @ApiOperation(value="관심사 삭제하기")
     @DeleteMapping(value = "/profiles/interests/{userId}/{selfIntroductionAnswerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> deleteProfileInterest(@PathVariable("userId") Long userId, @PathVariable("selfIntroductionAnswerId") Long selfIntroductionAnswerId) {
-        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, "interest");
+        profileService.deleteSelfIntroductionAnswer(userId, selfIntroductionAnswerId, SelfIntroductionType.INTEREST);
         return ResponseEntity.ok(ResultResponse.of(ResultCode.DELETE_INTEREST_SUCCESS));
     }
 }

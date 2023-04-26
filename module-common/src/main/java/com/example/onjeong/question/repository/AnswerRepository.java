@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
     List<Answer> findByQuestion(Question question);
+    List<Answer> findByQuestionAndUser(Question question, User user);
     void deleteAllByUser(User user);
 }

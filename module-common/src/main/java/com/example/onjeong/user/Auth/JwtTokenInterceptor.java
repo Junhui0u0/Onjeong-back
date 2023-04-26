@@ -1,5 +1,7 @@
 package com.example.onjeong.user.Auth;
 
+import com.example.onjeong.error.ErrorCode;
+import com.example.onjeong.user.exception.TokenNullException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,10 +19,7 @@ public class JwtTokenInterceptor implements HandlerInterceptor{
         final String token = request.getHeader(AuthConstants.AUTH_HEADER_ACCESS);
         if(token != null) return true;
         else{
-            request.setAttribute("exception", "AuthenticationException");
-            request.setAttribute("message", "token null");
-            request.getRequestDispatcher("/api/error").forward(request, response);
-            return false;
+            throw new TokenNullException("token null", ErrorCode.TOKEN_NULL);
         }
     }
 }

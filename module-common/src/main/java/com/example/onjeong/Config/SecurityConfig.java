@@ -2,7 +2,6 @@ package com.example.onjeong.Config;
 import com.example.onjeong.user.Auth.CustomAuthenticationFilter;
 import com.example.onjeong.user.Auth.CustomLoginFailureHandler;
 import com.example.onjeong.user.Auth.CustomLoginSuccessHandler;
-import com.example.onjeong.user.redis.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final RefreshTokenRepository refreshTokenRepository;
 
 
     @Override
@@ -77,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public CustomLoginSuccessHandler customLoginSuccessHandler(){
-        return new CustomLoginSuccessHandler(refreshTokenRepository);
+        return new CustomLoginSuccessHandler();
     }
 
     @Bean

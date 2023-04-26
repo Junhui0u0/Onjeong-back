@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 
 @Api(tags="User")
 @RequiredArgsConstructor
@@ -46,9 +47,24 @@ public class UserController {
         return ResponseEntity.ok(ResultResponse.of(ResultCode.SIGNUP_SUCCESS));
     }
 
+    //스웨거로 로그인 테스트 하기 위한 함수
     @ApiOperation(value="로그인")
     @PostMapping(value="/login")
     public void login(@RequestBody UserLoginDto userLoginDto){
+
+    }
+
+    @ApiOperation(value="로그인 성공시 수행하는 작업")
+    @PostMapping(value="/login/{userId}")
+    public ResponseEntity<ResultResponse> successToLogin(@PathVariable("userId") Long userId){
+        HashMap<String, String> token= userService.getNewToken(userId);
+        HttpHeaders headers= new HttpHeaders();
+        headers.add(AuthConstants.AUTH_HEADER_ACCESS, token.get("newAccessToken"));
+        headers.add(AuthConstants.AUTH_HEADER_REFRESH, token.get("newRefreshToken"));
+
+        UserDto data= userService.getUser();
+
+        return ResponseEntity.ok().headers(headers).body(ResultResponse.of(ResultCode.LOGIN_SUCCESS,data));
     }
 
     @ApiOperation(value = "로그아웃")

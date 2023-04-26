@@ -273,7 +273,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, "favorite");
+                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, SelfIntroductionType.FAVORITE);
 
 
                 //then
@@ -297,7 +297,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, "hate");
+                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, SelfIntroductionType.HATE);
 
 
                 //then
@@ -321,7 +321,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, "expression");
+                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, SelfIntroductionType.EXPRESSION);
 
 
                 //then
@@ -345,7 +345,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, "interest");
+                profileService.registerSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerRegisterDto, SelfIntroductionType.INTEREST);
 
 
                 //then
@@ -369,7 +369,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, "favorite");
+                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, SelfIntroductionType.FAVORITE);
 
 
                 //then
@@ -389,7 +389,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, "hate");
+                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, SelfIntroductionType.HATE);
 
 
                 //then
@@ -409,7 +409,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, "expression");
+                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, SelfIntroductionType.EXPRESSION);
 
 
                 //then
@@ -429,7 +429,7 @@ public class ProfileServiceTest {
 
 
                 //when
-                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, "interest");
+                profileService.deleteSelfIntroductionAnswer(user.getUserId(), selfIntroductionAnswerId, SelfIntroductionType.INTEREST);
 
 
                 //then

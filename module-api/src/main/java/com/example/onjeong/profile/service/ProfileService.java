@@ -135,32 +135,32 @@ public class ProfileService {
 
     //자기소개 답변 작성하기
     @Transactional
-    public Profile registerSelfIntroductionAnswer(final Long userId, final SelfIntroductionAnswerRegisterDto selfIntroductionAnswerRegisterDto, final String category){
+    public Profile registerSelfIntroductionAnswer(final Long userId, final SelfIntroductionAnswerRegisterDto selfIntroductionAnswerRegisterDto, final SelfIntroductionType category){
         final User user= authUtil.getUserByUserId(userId);
         final Profile profile= profileUtil.getProfileByUser(user);
         switch(category){
-            case "favorite":
+            case FAVORITE:
                 final Favorite favorite= Favorite.builder()
                         .favoriteContent(selfIntroductionAnswerRegisterDto.getSelfIntroductionAnswerContent())
                         .profile(profile)
                         .build();
                 favoriteRepository.save(favorite);
                 break;
-            case "hate":
+            case HATE:
                 final Hate hate= Hate.builder()
                         .hateContent(selfIntroductionAnswerRegisterDto.getSelfIntroductionAnswerContent())
                         .profile(profile)
                         .build();
                 hateRepository.save(hate);
                 break;
-            case "expression":
+            case EXPRESSION:
                 final Expression expression= Expression.builder()
                         .expressionContent(selfIntroductionAnswerRegisterDto.getSelfIntroductionAnswerContent())
                         .profile(profile)
                         .build();
                 expressionRepository.save(expression);
                 break;
-            case "interest":
+            case INTEREST:
                 final Interest interest= Interest.builder()
                         .interestContent(selfIntroductionAnswerRegisterDto.getSelfIntroductionAnswerContent())
                         .profile(profile)
@@ -174,20 +174,20 @@ public class ProfileService {
 
     //자기소개 답변 삭제하기
     @Transactional
-    public void deleteSelfIntroductionAnswer(final Long userId, final Long selfIntroductionAnswerId, final String category){
+    public void deleteSelfIntroductionAnswer(final Long userId, final Long selfIntroductionAnswerId, final SelfIntroductionType category){
         final User user= authUtil.getUserByUserId(userId);
         final Profile profile= profileUtil.getProfileByUser(user);
         switch(category){
-            case "favorite":
+            case FAVORITE:
                 favoriteRepository.deleteByFavoriteIdAndProfile(selfIntroductionAnswerId, profile);
                 break;
-            case "hate":
+            case HATE:
                 hateRepository.deleteByHateIdAndProfile(selfIntroductionAnswerId, profile);
                 break;
-            case "expression":
+            case EXPRESSION:
                 expressionRepository.deleteByExpressionIdAndProfile(selfIntroductionAnswerId, profile);
                 break;
-            case "interest":
+            case INTEREST:
                 interestRepository.deleteByInterestIdAndProfile(selfIntroductionAnswerId, profile);
                 break;
         }

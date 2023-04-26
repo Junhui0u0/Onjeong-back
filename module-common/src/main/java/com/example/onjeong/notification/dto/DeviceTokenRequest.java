@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceTokenRequest {
-    private String userNickname;
+    private Boolean check;
     private String token;
 }

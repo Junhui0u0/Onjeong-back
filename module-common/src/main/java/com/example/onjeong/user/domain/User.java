@@ -48,6 +48,9 @@ public class User extends Common implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column(name = "check_notification")
+    private Boolean checkNotification;
+
     @Column(name = "device_token")
     private String deviceToken;
 
@@ -85,6 +88,10 @@ public class User extends Common implements Serializable {
 
     public void updateUserBirth(LocalDate userBirth){
         this.userBirth=userBirth;
+    }
+
+    public void updateCheckNotification(Boolean checkNotification){
+        this.checkNotification = checkNotification;
     }
 
     public void updateDeviceToken(String deviceToken){

@@ -6,6 +6,7 @@ import com.example.onjeong.question.domain.Question;
 import com.example.onjeong.question.dto.AnswerDto;
 import com.example.onjeong.question.dto.AnswerModifyRequestDto;
 import com.example.onjeong.question.dto.QuestionDto;
+import com.example.onjeong.question.exception.AnswerDuplicateException;
 import com.example.onjeong.question.exception.AnswerNotExistException;
 import com.example.onjeong.question.exception.NullQuestionException;
 import com.example.onjeong.question.repository.AnswerRepository;
@@ -141,6 +142,13 @@ public class QuestionService {
         Question question = questionRepository.findWeeklyQuestion(user.getFamily().getFamilyId());
         if(question == null){ // 서버에 준비된 이주의 질문 내용이 없는 경우
             throw new NullQuestionException("weekly question not exist", ErrorCode.QUESTION_NOTEXIST);
+        }
+
+        System.out.println("hi!");
+        List<Answer> answerList = answerRepository.findByQuestionAndUser(question, user);
+        System.out.println(answerList.size());
+        if(answerList.size() != 0){
+            throw new AnswerDuplicateException("User already created an answer", ErrorCode.ANSWER_DUPLICATE);
         }
 
         Answer answer = Answer.builder()

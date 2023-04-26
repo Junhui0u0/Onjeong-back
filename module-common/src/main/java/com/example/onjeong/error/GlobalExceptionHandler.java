@@ -11,6 +11,7 @@ import com.example.onjeong.home.exception.RandCoinDuplicateException;
 import com.example.onjeong.mail.exception.MailNotExistException;
 import com.example.onjeong.mail.exception.ReceiveUserNotExistException;
 import com.example.onjeong.profile.exception.ProfileNotExistException;
+import com.example.onjeong.question.exception.AnswerDuplicateException;
 import com.example.onjeong.user.exception.*;
 import com.example.onjeong.question.exception.AnswerNotExistException;
 import com.example.onjeong.question.exception.NullQuestionException;
@@ -43,6 +44,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ReceiveUserNotExistException.class)
     public ResponseEntity<ErrorResponse> handleReceiveUserNotExistException(ReceiveUserNotExistException ex){
         log.error("handleReceiveUserNotExistException",ex);
+        final ErrorResponse response = new ErrorResponse(ex.getErrorCode());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(AnswerDuplicateException.class)
+    public ResponseEntity<ErrorResponse> handleAnswerDuplicateException(AnswerDuplicateException ex){
+        log.error("handleAnswerDuplicateException",ex);
         final ErrorResponse response = new ErrorResponse(ex.getErrorCode());
         return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
     }
@@ -183,6 +191,27 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(TokenNullException.class)
     public ResponseEntity<ErrorResponse> handleTokenNullException(TokenNullException ex){
         log.error("handleTokenNullException",ex);
+        final ErrorResponse response = new ErrorResponse(ex.getErrorCode());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(AccessTokenNotSameException.class)
+    public ResponseEntity<ErrorResponse> handleAccessTokenNotSameException(AccessTokenNotSameException ex){
+        log.error("handleAccessTokenNotSameException",ex);
+        final ErrorResponse response = new ErrorResponse(ex.getErrorCode());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(AccessTokenExpiredException.class)
+    public ResponseEntity<ErrorResponse> handleAccessTokenExpiredException(AccessTokenExpiredException ex){
+        log.error("handleAccessTokenExpiredException",ex);
+        final ErrorResponse response = new ErrorResponse(ex.getErrorCode());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(LoginFailException.class)
+    public ResponseEntity<ErrorResponse> handleLoginFailException(LoginFailException ex){
+        log.error("handleLoginFailException",ex);
         final ErrorResponse response = new ErrorResponse(ex.getErrorCode());
         return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getStatus()));
     }

@@ -2,7 +2,6 @@ package com.example.onjeong.Config;
 
 import com.example.onjeong.user.Auth.AuthConstants;
 import com.example.onjeong.user.Auth.TokenUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
@@ -21,13 +20,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void doFilterInternal(final HttpServletRequest req, final HttpServletResponse res, final FilterChain chain) throws IOException, ServletException {
@@ -47,25 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (ExpiredJwtException ex) {
             if(!req.getRequestURI().equals("/refresh")){
-                Map<String, String> map = new HashMap<>();
-                res.setContentType("application/json");
-                res.setCharacterEncoding("utf-8");
-                map.put("status", "401");
-                map.put("message", "ACCESS TOKEN EXPIRED");
-                map.put("code", "A004");
-                res.getWriter().write(objectMapper.writeValueAsString(map));
-                res.setStatus(401);
+                req.getRequestDispatcher("/api/error/1").forward(req, res);
                 return;
             }
         } catch (MalformedJwtException | SignatureException e){
-            Map<String, String> map = new HashMap<>();
-            res.setContentType("application/json");
-            res.setCharacterEncoding("utf-8");
-            map.put("status", "401");
-            map.put("message", "ACCESS TOKEN NOT SAME");
-            map.put("code", "A005");
-            res.getWriter().write(objectMapper.writeValueAsString(map));
-            res.setStatus(401);
+            req.getRequestDispatcher("/api/error/2").forward(req, res);
             return;
         }
         chain.doFilter(req, res);

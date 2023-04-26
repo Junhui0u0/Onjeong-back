@@ -1,23 +1,20 @@
 package com.example.onjeong.user.Auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                        AuthenticationException exception) throws IOException {
+                                        AuthenticationException exception) throws IOException, ServletException {
         String exceptionMsg = "";
 
         if (exception instanceof AuthenticationServiceException) {
@@ -39,14 +36,7 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
             exceptionMsg="비밀번호가 만료되었습니다";
         }
 
-        Map<String, String> map = new HashMap<>();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("utf-8");
-        map.put("status", "404");
-        map.put("code", "Login fail");
-        map.put("message", exceptionMsg);
-        response.getWriter().write(objectMapper.writeValueAsString(map));
-        response.setStatus(404);
-
+        request.setAttribute("message", exceptionMsg);
+        request.getRequestDispatcher("/api/error/3").forward(request, response);
     }
 }

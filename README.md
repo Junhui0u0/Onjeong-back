@@ -16,8 +16,7 @@
     <!-- <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a> -->
     <!-- · -->
   </p>
-</div><br>
-
+  
 
 ## 박준희 (Backend)
 저는 `family`, `user`, `profile`, `anniversary`, `board` 도메인 개발과 `AWS EC2 관리`, `DNS 등록`, `로드밸런싱`, `CI/CD`를 담당했습니다. <br><br><br><br>

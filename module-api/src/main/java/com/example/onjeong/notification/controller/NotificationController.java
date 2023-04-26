@@ -1,5 +1,6 @@
 package com.example.onjeong.notification.controller;
 
+import com.example.onjeong.notification.dto.DeviceTokenRequest;
 import com.example.onjeong.notification.service.NotificationService;
 import com.example.onjeong.result.ResultCode;
 import com.example.onjeong.result.ResultResponse;
@@ -11,10 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags="FCM")
 @RequiredArgsConstructor
@@ -41,5 +39,18 @@ public class NotificationController {
     @GetMapping(value = "/notification", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> notifications() {
         return ResponseEntity.ok(ResultResponse.of(ResultCode.GET_ALARM_SUCCESS, notificationService.getNotifications()));
+    }
+
+    @ApiOperation(value="알림 허용 여부 확인")
+    @GetMapping(value = "/token/check", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResultResponse> FCMCheck() {
+        return ResponseEntity.ok(ResultResponse.of(ResultCode.CHECK_TOKEN_SUCCESS, notificationService.checkNotification()));
+    }
+
+    @ApiOperation(value="알림 허용 여부 변경")
+    @PostMapping(value = "/token/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResultResponse> FCMUpdate(@RequestBody DeviceTokenRequest deviceTokenRequest) {
+        notificationService.updateNotification(deviceTokenRequest);
+        return ResponseEntity.ok(ResultResponse.of(ResultCode.UPDATE_TOKEN_SUCCESS));
     }
 }

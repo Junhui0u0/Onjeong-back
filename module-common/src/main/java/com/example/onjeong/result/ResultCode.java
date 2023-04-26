@@ -57,6 +57,8 @@ public enum ResultCode {
     POST_TOKEN_SUCCESS(200, "F001", "디바이스 토큰을 등록했습니다."),
     DELETE_TOKEN_SUCCESS(200, "F002", "디바이스 토큰을 삭제했습니다."),
     GET_ALARM_SUCCESS(200, "F003", "최근 3일의 알람을 모두 조회했습니다."),
+    CHECK_TOKEN_SUCCESS(200, "F004", "알림 허용 여부를 조회했습니다."),
+    UPDATE_TOKEN_SUCCESS(200, "F005", "알림 허용 여부를 변경했습니다."),
 
     // Home
     GET_FLOWER_SUCCESS(200, "H001", "패밀리 레벨에 따른 현재 꽃 종류를 조회했습니다."),
