@@ -35,7 +35,7 @@
 
 ## AWS 클라우드 구조
 <div style="text-align: center;">
-<img src="https://github.com/On-jeong/Onjeong-back/assets/71383600/8575fd0f-90aa-4cfb-b972-5641255b6499" width="800" height="350" />
+<img src="https://github.com/On-jeong/Onjeong-back/assets/71383600/8575fd0f-90aa-4cfb-b972-5641255b6499"/>
 </div>  
 <br><br><br>
 
