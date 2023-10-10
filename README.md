@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="https://www.onjeong-app.com/">
-    <img src="https://onjeong-prod.s3.ap-northeast-2.amazonaws.com/profile/24c4b2d3-be1c-4bd8-8d95-79e7a66ce23eonjeong%20logo.png?s=200&v=4" alt="Logo" width="80" height="80">
+    <img src="https://github.com/On-jeong/.github/assets/71383600/2a83f153-af03-45b5-b8d4-54ed5cf31737" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Onjeong-Backend</h3>
 
@@ -35,18 +35,18 @@
 
 ## AWS 클라우드 구조
 <div style="text-align: center;">
-<img src="https://onjeong-prod.s3.ap-northeast-2.amazonaws.com/git/%EC%98%A8%EC%A0%95+aws+%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C+%EA%B5%AC%EC%A1%B0_2.png" width="800" height="350" />
+<img src="https://github.com/On-jeong/Onjeong-back/assets/71383600/8575fd0f-90aa-4cfb-b972-5641255b6499" width="800" height="350" />
 </div>  
 <br><br><br>
 
 
 ##  인프라 구조
 - 운영서버 CI/CD
-<img src="https://onjeong-prod.s3.ap-northeast-2.amazonaws.com/git/%EC%98%A8%EC%A0%95+%EC%9A%B4%EC%98%81+CI%2CCD+1.png"/>
+<img src="https://github.com/On-jeong/Onjeong-back/assets/71383600/efafe455-28e9-4f8b-9bfb-a2cc0a558e6c"/>
 <br><br>
 
 - 개발서버 CI/CD
-<img src="https://onjeong-prod.s3.ap-northeast-2.amazonaws.com/git/%EC%98%A8%EC%A0%95+%EA%B0%9C%EB%B0%9C+CI%2CCD+1.png"/>
+<img src="https://github.com/On-jeong/Onjeong-back/assets/71383600/96cf0096-4dad-4dbe-aff7-97e5faa9574a"/>
 <br><br><br>
 
 
